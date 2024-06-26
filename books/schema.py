@@ -67,6 +67,3 @@ class Mutation(graphene.ObjectType):
     create_book = CreateBookMutation.Field()
     update_book = UpdateBookMutation.Field()
     delete_book = DeleteBookMutation.Field()
-
-
-schema = graphene.Schema(query=Query, mutation=Mutation)
