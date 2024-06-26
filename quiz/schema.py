@@ -13,7 +13,7 @@ class CategoryType(DjangoObjectType):
 class QuizType(DjangoObjectType):
     class Meta:
         model = Quiz
-        fields = ("id", "name", "category", "questions", "date_created")
+        fields = ("id", "title", "category", "questions", "date_created")
 
 
 class QuestionType(DjangoObjectType):
@@ -29,10 +29,10 @@ class AnswerType(DjangoObjectType):
 
 
 class Query(graphene.ObjectType):
-    categories = graphene.List(CategoryType)
-    quizzes = graphene.List(QuizType)
-    questions = graphene.List(QuestionType)
-    answers = graphene.List(AnswerType)
+    categories = DjangoListField(CategoryType)
+    quizzes = DjangoListField(QuizType)
+    questions = DjangoListField(QuestionType)
+    answers = DjangoListField(AnswerType)
 
     def resolve_categories(self, info):
         return Category.objects.all()
